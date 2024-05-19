@@ -24,3 +24,11 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+export enum Palette  {
+  purple = '#211736',
+  yellow = '#F8BD25',
+  pink = '#B4398D',
+  white = '#FFFFFF',
+  sand = "#FEF7E6"
+}  
