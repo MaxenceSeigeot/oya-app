@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import * as Location from 'expo-location';
 import { Animated, PanResponder, PanResponderGestureState } from "react-native";
-import { styles as NavbarStyles } from '@/components/navbar/styles';
-import Region from "@/interfaces/regions";
+import { styles as NavbarStyles } from '@/components/home/components/panel/styles';
+import Region from "@/interfaces/region";
 import { Images } from "@/constants/Images";
 
 export function useLocation() {
   const [userLocation, setUserLocation] = useState<Region | undefined>(undefined);
   const [currentLocation, setCurrentLocation] = useState<Region | undefined>(undefined);
+  const getUserMarker = (location: Location.LocationObject):Region => ({
+    id:0,
+    title:"You",
+    longitude: location.coords.longitude,
+    longitudeDelta: 0.005,
+    latitude: location.coords.latitude,
+    latitudeDelta: 0.008,
+    image:Images.userMapPosition,
+  })
 
   const handleCenterMap = () => {
     if (!userLocation) return;
@@ -27,35 +36,45 @@ export function useLocation() {
           throw new Error('Permission to access location was denied');
         }
         const location = await Location.getCurrentPositionAsync({});
-        setUserLocation({
-          longitude: location.coords.longitude,
-          longitudeDelta: 0.005,
-          latitude: location.coords.latitude,
-          latitudeDelta: 0.008,
-        });
+        setUserLocation(getUserMarker(location));
       } catch (error) {
         console.error('Error getting user location:', error);
       }
     })();
   }, []);
 
-  const markers = [
-    { id: 1, longitude: 12, latitude: 20 },
-    { id: 2, longitude: 42, latitude: 30 },
-    { id: 3, longitude: 12, latitude: 58 },
-    { id: 4, longitude: 2, latitude: 25 },
-    { id: 5, longitude: 21, latitude: 52 },
-    { id: 6, longitude: 22, latitude: 50 },
-  ];
+  const [markers, setMarkers] = useState([])
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://192.168.1.13:3000/batiments');
+      const results = await response.json();
+      setMarkers(
+        results.map((result:any) => ({
+          id: result.id_batiment,
+          title: result.nom,
+          longitude: result.longitude,
+          longitudeDelta: 0.005,
+          latitude: result.latitude,
+          latitudeDelta: 0.008,
+        }))
+      )
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  },[])
 
   return {
-    currentLocation, setCurrentLocation, userLocation, setUserLocation, handleCenterMap, markers:[...markers, {
-      id: 0,
-      longitude: userLocation?.longitude || 0,
-      latitude: userLocation?.latitude || 0,
-      title: "Your Location",
-      image: Images.userMapPosition
-    }]
+    currentLocation,
+    setCurrentLocation,
+    userLocation,
+    setUserLocation,
+    handleCenterMap,
+    markers:[userLocation, ...markers]
   }
 }
 

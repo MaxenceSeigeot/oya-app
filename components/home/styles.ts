@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     },
     locationButton:{
       position:"absolute",
-      bottom:180,
+      bottom:225,
       right:15,
       width:50,
       height:50,

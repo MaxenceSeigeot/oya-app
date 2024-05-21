@@ -27,6 +27,7 @@ export const Colors = {
 
 export enum Palette  {
   purple = '#211736',
+  light_purple = "#9982CA",
   yellow = '#F8BD25',
   pink = '#B4398D',
   white = '#FFFFFF',

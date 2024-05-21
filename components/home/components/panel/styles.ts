@@ -3,25 +3,21 @@ import { Palette } from '@/constants/Colors';
 
 export const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'flex-end', // Align children to the bottom
     width: '100%', 
-    gap: 6,
-    backgroundColor: 'white',
+    paddingHorizontal:25,
+    position: 'absolute',
+    bottom: -105, 
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     zIndex: 2,
-    position: 'absolute',
-    bottom: -100,  // Ensure the container is at the bottom of the screen
+    backgroundColor: 'white',
   },
   expandBarContainer: {
-    display:"flex",
     width:"100%",
     height:50,
+    display:"flex",
     alignItems:"center",
     justifyContent:"center",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
   },
   expandBar: {
     width: '30%',
@@ -29,10 +25,15 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: 'grey',
   },
+
+  upperPanel: {
+    marginBottom: 15,
+  },
+
   pressable: {
     justifyContent: 'center',
     alignContent: 'center',
-    width: '80%',
+    width: '100%',
     height: 40,
     borderRadius: 20,
   },
@@ -47,20 +48,18 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Palette.purple,
   },
-  expandableContainer: {
-    width: '100%',
-    position: 'absolute',
-    bottom: 0, // Ensure the expandable part starts off-screen
+  lowerPanel: {
+    display:"flex",
+    gap:5
   },
   expandedPressable: {
     justifyContent: 'center',
     alignContent: 'center',
-    width: '80%',
+    width: '100%',
     height: 40,
     backgroundColor: '#D3C9E8',
   },
   pressable3: {
-    marginTop: 15,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
   },
