@@ -1,5 +1,4 @@
 import { Palette } from "@/constants/Colors";
-import { Fonts } from "@/constants/Fonts";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
       textTitle:{
         color:Palette.yellow,
         textAlign:"center",
-        fontFamily:"Poppins",
+        fontFamily:"poppins_semi_bold",
         fontSize:12,
       },
       textData:{
