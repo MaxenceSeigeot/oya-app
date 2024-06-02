@@ -1,4 +1,4 @@
-import { View, Pressable, Animated, Image, Text } from 'react-native';
+import { View, Pressable, Animated, Image } from 'react-native';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { styles } from '@/components/home/styles';
 import { Images } from '@/constants/Images';
@@ -24,7 +24,7 @@ export default function Home() {
       </Pressable>
 
       <Animated.View style={navbarStyle}>
-        <Pressable style={styles.locationButton} onPress={handleCenterMap}>
+        <Pressable style={styles.locationButton} onPressOut={handleCenterMap}>
           <Image style={styles.profile} source={Images.centerMapButton} />
         </Pressable>
         

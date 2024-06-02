@@ -4,6 +4,7 @@ import { Palette } from '@/constants/Colors';
 export const styles = StyleSheet.create({
   container: {
     width: '100%', 
+    height: 300,
     paddingHorizontal:25,
     position: 'absolute',
     bottom: -105, 
@@ -30,12 +31,21 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+  genericPanel: {
+    display:"flex",
+    gap:10,
+    marginTop:10,
+    marginBottom:30,
+  },
+
   pressable: {
+    display:"flex",
     justifyContent: 'center',
     alignContent: 'center',
     width: '100%',
     height: 40,
     borderRadius: 20,
+    gap:5,
   },
   pressable1: {
     backgroundColor: Palette.purple,

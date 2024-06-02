@@ -21,7 +21,6 @@ export function useLocation() {
   const handleCenterMap = () => {
     if (!userLocation) return;
     setCurrentLocation(userLocation);
-    console.log(userLocation)
   };
 
   useEffect(() => {

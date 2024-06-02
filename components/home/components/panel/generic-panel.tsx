@@ -13,7 +13,7 @@ export default function GenericPanel ({}: GenericPanelProps) {
   const navigation = useNavigation();
 
   return (
-    <>
+    <View style={styles.genericPanel}>
       <Pressable style={[styles.pressable, styles.pressable1]}>
         <Text style={[styles.pressableText, styles.pressableText1]}>Trouver une capsule</Text>
       </Pressable>
@@ -21,6 +21,6 @@ export default function GenericPanel ({}: GenericPanelProps) {
         <Text style={[styles.pressableText, styles.pressableText2]}>QR Code</Text>
         <Image style={styles.buttonImage} source={Images.qr} />
       </Pressable>
-    </>
+    </View>
   );
 };

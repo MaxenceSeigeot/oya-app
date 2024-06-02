@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native';
 import { Palette } from '@/constants/Colors';
 
 export const styles = StyleSheet.create({
+    specificPanel: {
+        display:"flex",
+        gap:10,
+      },
     container:{
         width:"100%",
         display:"flex",
