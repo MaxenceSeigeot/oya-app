@@ -5,8 +5,6 @@ export default interface Region extends IRegion {
     id:number,
     title:string,
     longitude: number,
-    longitudeDelta: number,
     latitude: number,
-    latitudeDelta: number
-    image?:Images,
+    image?: Images,
 }

@@ -4,7 +4,7 @@ import { Palette } from '@/constants/Colors';
 export const styles = StyleSheet.create({
   container: {
     width: '100%', 
-    height: 300,
+    height: 320,
     paddingHorizontal:25,
     position: 'absolute',
     bottom: -105, 
@@ -28,14 +28,14 @@ export const styles = StyleSheet.create({
   },
 
   upperPanel: {
-    marginBottom: 15,
+    marginBottom: 20,
   },
 
   genericPanel: {
     display:"flex",
-    gap:10,
-    marginTop:10,
-    marginBottom:30,
+    gap:20,
+    marginTop: 30,
+    marginBottom:0,
   },
 
   pressable: {

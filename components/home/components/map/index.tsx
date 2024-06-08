@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { styles } from './styles';
-import Region from '@/interfaces/region';
+import { MapUtils } from '@/constants/MapUtils';
+import Location from '@/interfaces/location';
+import { LocationContext } from '@/providers/locationProvider';
 
 interface HomeMapProps {
-  currentLocation: Region | undefined;
-  setCurrentLocation: any,
-  userLocation: Region;
-  markers: any[],
   isDragging: boolean,
-  setSelectedMarker: (marker: Region | undefined) => void,
+  locations: (Location | undefined)[],
+  setSelectedLocation: React.Dispatch<React.SetStateAction<Location | undefined>>,
 }
 
-export default function HomeMap({ currentLocation, userLocation, markers, isDragging, setSelectedMarker }: HomeMapProps) {
+export default function HomeMap({ isDragging, locations, setSelectedLocation }: HomeMapProps) {
+  const { userLocation } = useContext(LocationContext)
+  
   return (
     <MapView
       style={styles.map}
@@ -22,21 +23,21 @@ export default function HomeMap({ currentLocation, userLocation, markers, isDrag
       showsIndoors={false}
       showsIndoorLevelPicker={false}
       showsCompass={false}
-      initialRegion={userLocation}
-      region={currentLocation}
+      initialRegion={{...userLocation, latitudeDelta:MapUtils.localLtDelta, longitudeDelta: MapUtils.localLgDelta}}
+      region={{...userLocation, latitudeDelta:MapUtils.localLtDelta, longitudeDelta: MapUtils.localLgDelta}}
       scrollEnabled={!isDragging}
       zoomEnabled={!isDragging}
       pitchEnabled={!isDragging}
       rotateEnabled={!isDragging}
-      onPress={() => setSelectedMarker(undefined)}
+/*       onPress={() => setSelectedLocation(undefined)} */
     >
-      {markers.map(marker => (
-        <Marker
-          key={marker.id_ville}
-          coordinate={{ longitude: marker.longitude, latitude: marker.latitude }}
-          title={marker.title}
-          image={marker.image}
-          onPress={()=> setSelectedMarker(marker)}
+      {locations.map(location => (
+        location && <Marker
+          key={location.id_batiment}
+          coordinate={{ longitude: location.longitude, latitude: location.latitude }}
+          title={location.nom}
+          image={location.images}
+          onPress={() => setSelectedLocation(location)}
         />
       ))}
     </MapView>

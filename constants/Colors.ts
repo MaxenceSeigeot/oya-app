@@ -30,6 +30,8 @@ export enum Palette  {
   light_purple = "#9982CA",
   yellow = '#F8BD25',
   pink = '#B4398D',
+  sand = "#FEF7E6",
   white = '#FFFFFF',
-  sand = "#FEF7E6"
+  gray = "#DDDDDD",
+  black = "#000000",
 }  

@@ -1,24 +1,23 @@
 import { PanResponderInstance, Pressable, Text, View } from "react-native";
 import { styles } from "./styles";
-import Region from "@/interfaces/region";
 import GenericPanel from "./generic-panel";
 import SpecificPanel from "./specific-panel";
+import Location from "@/interfaces/location";
 
 interface PanelProps {
     panResponder:PanResponderInstance,
-    selectedMarker: Region | undefined,
-    userLocation: Region | undefined ,
+    selectedLocation: Location | undefined,
 }
 
-export default function Panel({ panResponder, selectedMarker, userLocation }: PanelProps) {
+export default function Panel({ panResponder, selectedLocation }: PanelProps) {
     return (
         <View style={styles.container}>
             <View style={styles.expandBarContainer} {...panResponder.panHandlers}>
                 <View style={styles.expandBar} />
             </View>
             <View style={styles.upperPanel}>
-                {selectedMarker
-                    ? <SpecificPanel selectedMarker={selectedMarker} userLocation={userLocation} />
+                {selectedLocation
+                    ? <SpecificPanel selectedLocation={selectedLocation} />
                     : <GenericPanel />
                 }
             </View>
