@@ -2,15 +2,15 @@ import { Pressable, Text, View } from "react-native";
 import { styles } from "./style";
 import { Palette } from "@/constants/Colors";
 import { EvilIcons } from "@expo/vector-icons";
-import { useNavigation } from "expo-router";
 import { Theme } from "@/constants/Theme";
+import { NavigationProp } from "@react-navigation/native";
 
 interface DefaultHeaderProps {
     title:string,
+    navigation:NavigationProp<ReactNavigation.RootParamList>,
 }
 
-export default function DefaultScreenHeader({title}: DefaultHeaderProps) {
-    const navigation = useNavigation()
+export default function DefaultScreenHeader({title, navigation}: DefaultHeaderProps) {
     return (
         <View style={styles.container}>
             <Pressable style={styles.backContainer} onPress={() => navigation.goBack()}>

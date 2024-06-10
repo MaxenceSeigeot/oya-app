@@ -4,8 +4,10 @@ export enum Routes {
     ACCOUNT = "account",
     ACCOUNT_INFO = "customer_informations",
     BOOK = "book",
+    PAYMENT = "payment",
 }
 export enum Drawer {
     HOME_MENU = "home_menu",
-    BOOK = "book"
+    CALENDAR = "calendar",
+    NONE = "none",
 }

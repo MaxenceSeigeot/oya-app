@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 import { Palette } from "@/constants/Colors";
 
 export const styles = StyleSheet.create({
+  drawerStyle:{
+    backgroundColor:"transparent",
+  },
   container: {
     display:"flex",
     flexDirection:"column",

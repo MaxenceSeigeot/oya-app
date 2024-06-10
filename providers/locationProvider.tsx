@@ -15,8 +15,8 @@ interface LocationContextValue {
 export const LocationContext = createContext<LocationContextValue>({} as LocationContextValue);
 
 interface LocationProviderProps {
-    children: ReactNode;
-  }
+  children: ReactNode;
+}
 
 export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
     const [userLocation, setUserLocation] = useState<Location | undefined>(undefined)
@@ -52,7 +52,7 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) 
     const [locations, setLocations] = useState<Location[]>([])
 
     const fetchData = async () => {
-      try { 
+      try {
         const results = await api('batiments');
         setLocations(
           results.map((result:any) => ({
@@ -73,12 +73,11 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) 
 
     const handleCenterMap = () => {
       if (!userLocation) return;
-      console.log("center")
       setUserLocation(userLocation);
     };
  
   if(!userLocation) return
-  console.log(locations)
+
   return (
     <LocationContext.Provider value={{ mapLocation, setMapLocation, userLocation, locations:[userLocation, ...locations], handleCenterMap }}>
         { children }

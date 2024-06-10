@@ -7,7 +7,7 @@ import RootLayoutNav from "./_layout-nav";
 export default function RootLayout() {
     const fontPath = "@/assets/fonts/"
     const [loaded, error] = useFonts({
-/*       poppins_black: require(`${fontPath}Poppins/Poppins-Black.ttf`),
+      poppins_black: require(`${fontPath}Poppins/Poppins-Black.ttf`),
       poppins_black_italic: require(`${fontPath}Poppins/Poppins-BlackItalic.ttf`),
       poppins_bold: require(`${fontPath}Poppins/Poppins-Bold.ttf`),
       poppins_bold_italic: require(`${fontPath}Poppins/Poppins-BoldItalic.ttf`),
@@ -26,7 +26,7 @@ export default function RootLayout() {
       poppins_thin: require(`${fontPath}Poppins/Poppins-Thin.ttf`),
       poppins_thin_italic: require(`${fontPath}Poppins/Poppins-ThinItalic.ttf`),
   
-      dela: require(`${fontPath}DelaGothicOne/DelaGothicOne.ttf`), */
+      dela: require(`${fontPath}DelaGothicOne/DelaGothicOne.ttf`),
   
       ...FontAwesome.font,
     });

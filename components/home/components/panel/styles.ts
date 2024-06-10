@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { Palette } from '@/constants/Colors';
 
 export const styles = StyleSheet.create({
+  drawerStyle:{
+    backgroundColor:"red",
+  },
   container: {
     width: '100%', 
     height: 320,
@@ -34,8 +37,8 @@ export const styles = StyleSheet.create({
   genericPanel: {
     display:"flex",
     gap:20,
-    marginTop: 30,
-    marginBottom:0,
+    marginTop: 20,
+    marginBottom: 10,
   },
 
   pressable: {
