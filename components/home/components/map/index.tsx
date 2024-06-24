@@ -1,19 +1,18 @@
-import React, { useContext } from 'react';
-import MapView, { Marker } from 'react-native-maps';
-import { styles } from './styles';
-import { MapUtils } from '@/constants/MapUtils';
-import Location from '@/interfaces/location';
-import { LocationContext } from '@/providers/locationProvider';
+import React, { useContext } from "react";
+import MapView, { Marker } from "react-native-maps";
+import { styles } from "./styles";
+import { MapUtils } from "@/constants/MapUtils";
+import Location from "@/interfaces/location";
+import { LocationContext } from "@/providers/locationProvider";
 
 interface HomeMapProps {
-  isDragging: boolean,
-  locations: (Location | undefined)[],
-  setSelectedLocation: React.Dispatch<React.SetStateAction<Location | undefined>>,
+  isDragging: boolean;
+  locations: (Location | undefined)[];
 }
 
-export default function HomeMap({ isDragging, locations, setSelectedLocation }: HomeMapProps) {
-  const { userLocation } = useContext(LocationContext)
-  
+export default function HomeMap({ isDragging, locations }: HomeMapProps) {
+  const { userLocation, setSelectedLocation } = useContext(LocationContext);
+
   return (
     <MapView
       style={styles.map}
@@ -23,23 +22,40 @@ export default function HomeMap({ isDragging, locations, setSelectedLocation }: 
       showsIndoors={false}
       showsIndoorLevelPicker={false}
       showsCompass={false}
-      initialRegion={{...userLocation, latitudeDelta:MapUtils.localLtDelta, longitudeDelta: MapUtils.localLgDelta}}
-      region={{...userLocation, latitudeDelta:MapUtils.localLtDelta, longitudeDelta: MapUtils.localLgDelta}}
+      initialRegion={{
+        ...userLocation,
+        latitudeDelta: MapUtils.localLtDelta,
+        longitudeDelta: MapUtils.localLgDelta,
+      }}
+      region={{
+        ...userLocation,
+        latitudeDelta: MapUtils.localLtDelta,
+        longitudeDelta: MapUtils.localLgDelta,
+      }}
       scrollEnabled={!isDragging}
       zoomEnabled={!isDragging}
       pitchEnabled={!isDragging}
       rotateEnabled={!isDragging}
-/*       onPress={() => setSelectedLocation(undefined)} */
+      /*       onPress={() => setSelectedLocation(undefined)} */
     >
-      {locations.map(location => (
-        location && <Marker
-          key={location.id_batiment}
-          coordinate={{ longitude: location.longitude, latitude: location.latitude }}
-          title={location.nom}
-          image={location.images}
-          onPress={() => setSelectedLocation(location)}
-        />
-      ))}
+      {locations.map(
+        (location) =>
+          location && (
+            <Marker
+              key={location.id}
+              coordinate={{ longitude: location.longitude, latitude: location.latitude }}
+              title={location.name}
+              image={location.images}
+              onPress={() => setSelectedLocation(location)}
+            />
+          )
+      )}
+      <Marker
+        key={userLocation.id}
+        coordinate={{ longitude: userLocation.longitude, latitude: userLocation.latitude }}
+        title={userLocation.name}
+        image={userLocation.images}
+      />
     </MapView>
   );
 }

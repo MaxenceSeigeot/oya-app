@@ -3,7 +3,7 @@ import { Palette } from "@/constants/Colors";
 
 export const styles = StyleSheet.create({
   drawerStyle:{
-    backgroundColor:"transparent",
+    backgroundColor: Palette.purple,
   },
   container: {
     display:"flex",

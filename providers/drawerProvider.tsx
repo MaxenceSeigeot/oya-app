@@ -3,6 +3,7 @@ import CustomDrawer from '@/components/drawers/custom-drawer';
 import { Drawer as EDrawer } from '@/constants/Routes';
 import CalendarDrawer from '@/components/drawers/calendar-drawer';
 import NoDrawer from '@/components/drawers/noDrawer';
+import DateRange from '@/interfaces/dateRange';
 
 interface Drawer {
     drawer: EDrawer | undefined
@@ -25,6 +26,7 @@ interface DrawerProviderProps {
 export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
     const [drawer, setDrawer] = useState<Drawer>({drawer:undefined, props:undefined})
     const [selectedDrawer, setSelectedDrawer] = useState<ReactElement>(<CustomDrawer />)
+    const [bookedDates, setBookedDates] = useState<DateRange>()
 
     useEffect(()=>{
       setSelectedDrawer(getDrawer())

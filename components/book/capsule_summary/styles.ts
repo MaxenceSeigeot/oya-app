@@ -41,5 +41,8 @@ export const styles = StyleSheet.create({
     },
     priceText:{
         fontFamily: Fonts.dela
+    },
+    dateBtnTxt:{
+        textDecorationLine:"underline",
     }
 })

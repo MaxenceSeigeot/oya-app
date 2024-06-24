@@ -4,11 +4,9 @@ import { styles } from "./styles";
 export const customDrawerConfig = {
     drawer:Drawer.HOME_MENU,
     props:{
-        style:{
+        drawerStyle:{
             drawerStyle:styles.drawerStyle,
             overlayColor: "transparent",
         }
     }
-
-    
 }

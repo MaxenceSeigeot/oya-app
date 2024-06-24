@@ -7,21 +7,28 @@ export const styles = StyleSheet.create({
   },
   container:{
     marginTop:30,
+    height:"100%"
   }
 })
 
+export const today = {
+  todayTextColor:Palette.yellow,
+  arrowColor:Palette.yellow,
+  
+}
+
 export const selected = {
-    selected: true,
-    selectedColor: 'blue',
-    selectedTextColor: 'white'
+  selected: true,
+  selectedColor: Palette.purple,
+  selectedTextColor: Palette.yellow
 }
 
 export const disabled = {
-    disabled: true,
-    disableTouchEvent: true,
-    customStyles: {
-      text: {
-        color: Palette.disabled,
-      },
+  disabled: true,
+  disableTouchEvent: true,
+  customStyles: {
+    text: {
+      color: Palette.disabled,
     },
-  };
+  },
+};

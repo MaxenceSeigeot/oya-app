@@ -27,6 +27,6 @@ export const styles = StyleSheet.create({
     disponibilityText:{
         color:Palette.light_purple,
         fontFamily:"poppins_semi_bold",
-        fontSize: 12,
+        fontSize: 10.5,
     },
 })

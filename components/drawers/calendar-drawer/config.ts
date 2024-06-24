@@ -4,7 +4,7 @@ import { styles } from "./style";
 export const calendarDrawerConfig = {
     drawer:Drawer.CALENDAR,
     props:{
-        style:{
+        drawerStyle:{
             drawerStyle:styles.drawerStyle,
             overlayColor: "transparent",
         }
