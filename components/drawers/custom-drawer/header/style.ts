@@ -42,6 +42,6 @@ export const styles = StyleSheet.create({
         color:Palette.yellow,
         textAlign:"center",
         fontSize:20,
-        fontFamily: `Dela`,
+        fontFamily: `montserrat`,
       }
 })

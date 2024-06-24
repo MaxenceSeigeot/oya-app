@@ -1,41 +1,101 @@
-import React, { ReactNode, createContext, useEffect, useState } from 'react';
-import * as Location from 'expo-location';
+import React, { ReactNode, createContext, useEffect, useState } from "react";
+import * as ExpoLocation from "expo-location";
+import { Images } from "@/constants/Images";
+import Location from "@/interfaces/location";
+import api from "@/functions/api";
 
 interface LocationContextValue {
-    mapLocation: { longitude: number, latitude: number };
-    setMapLocation: (React.Dispatch<React.SetStateAction<{ longitude: number, latitude: number }>>);
-    userLocation: { longitude: number, latitude: number };
-    setUserLocation: (React.Dispatch<React.SetStateAction<{ longitude: number, latitude: number }>>);
-  }
+  locations: Location[];
+  mapLocation: { longitude: number; latitude: number };
+  userLocation: Location;
+  setMapLocation: React.Dispatch<React.SetStateAction<{ longitude: number; latitude: number }>>;
+  handleCenterMap: () => void;
+  selectedLocation: Location | undefined;
+  setSelectedLocation: React.Dispatch<React.SetStateAction<Location | undefined>>;
+}
 
 export const LocationContext = createContext<LocationContextValue>({} as LocationContextValue);
 
 interface LocationProviderProps {
-    children: ReactNode;
-  }
+  children: ReactNode;
+}
 
 export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
-    const [userLocation, setUserLocation] = useState({ longitude: 0, latitude: 0 })
-    const [mapLocation, setMapLocation] = useState({longitude:47.471102348159214, latitude:-0.6015571372641145})
-  
-    useEffect(() => {
-       (async () => {
-         try {
-           let { status } = await Location.requestForegroundPermissionsAsync();
-           if (status !== 'granted') {
-             throw new Error('Permission to access location was denied');
-           }
-           
-           let location = await Location.getCurrentPositionAsync({});
-           setUserLocation(location.coords);
-         } catch (error) {
-           console.log('Error getting user location:', error);
-         }
-       })();
-     }, []);
+  const [selectedLocation, setSelectedLocation] = useState<Location | undefined>(undefined);
+  const [userLocation, setUserLocation] = useState<Location | undefined>(undefined);
+  const [mapLocation, setMapLocation] = useState({
+    longitude: 47.471102348159214,
+    latitude: -0.6015571372641145,
+  });
+
+  const getUserMarker = (location: ExpoLocation.LocationObject): Location => {
+    return {
+      id: 0,
+      name: "You",
+      address: "",
+      city: 0,
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+      images: Images.userMapPosition,
+    };
+  };
+  const getUserLocation = async () => {
+    try {
+      const { status } = await ExpoLocation.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        throw new Error("Permission to access location was denied");
+      }
+      const location = await ExpoLocation.getCurrentPositionAsync({});
+      setUserLocation(getUserMarker(location));
+      setMapLocation(location.coords);
+    } catch (error) {
+      console.error("Error getting user location:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    getUserLocation();
+  }, []);
+
+  const [locations, setLocations] = useState<Location[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const results = await api({ route: "buildings" });
+
+      setLocations(
+        results.map((result: Location) => ({
+          id: result.id,
+          name: result.name,
+          longitude: result.longitude,
+          latitude: result.latitude,
+        }))
+      );
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+
+  const handleCenterMap = () => {
+    if (!userLocation) return;
+    getUserLocation();
+  };
+
+  if (!userLocation) return;
 
   return (
-    <LocationContext.Provider value={{ mapLocation, setMapLocation, userLocation, setUserLocation }}>
+    <LocationContext.Provider
+      value={{
+        mapLocation,
+        setMapLocation,
+        userLocation,
+        locations: locations,
+        handleCenterMap,
+        selectedLocation,
+        setSelectedLocation,
+      }}
+    >
       {children}
     </LocationContext.Provider>
   );
